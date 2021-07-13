@@ -12,14 +12,14 @@ const config = require('./config/config');
 //initialize mocha
 const mocha = new Mocha(mochaOptions);
 
-//add all test files
+// //add all test files
 // glob('test/**/*.js', function (err, files) {
 //   files.forEach((file) => {
 //     mocha.addFile(file);
 //   });
 // });
 
-mocha.addFile('./test/ui/login.spec.js');
+mocha.addFile('./test/ui/admin.spec.js');
 
 //create driver and add it to global object
 const createDriver = async (browser) => {
@@ -31,6 +31,7 @@ createDriver(config.browser).then((driver) => {
   global.By = By;
   global.Key = Key;
   global.until = until;
+
   mocha
     .run()
     .on('fail', function (test, err) {

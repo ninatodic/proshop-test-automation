@@ -25,7 +25,7 @@ class RegisterPage extends BasePage {
     return this.getElementByCss('.alert-danger.show');
   }
 
-  async registerCustomer(registrationData) {
+  async registerUser(registrationData) {
     if (registrationData.name) {
       await this.inputTextIntoField(
         await this.nameField,

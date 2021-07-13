@@ -1,5 +1,6 @@
 const axios = require('axios');
 const config = require('../config/config');
+const { registrationData } = require('../testData/registrationData');
 
 const a = axios.create({});
 
@@ -7,13 +8,32 @@ class ApiHandler {
   constructor() {
     this.adminToken = '';
   }
-  async loginAdmin(authCredentials) {
+  async loginAdmin(
+    authCredentials = {
+      email: config.adminEmail,
+      password: config.adminPassword,
+    }
+  ) {
     try {
       const response = await axios.post(`${config.baseUrl}/api/users/login`, {
         email: authCredentials.email,
         password: authCredentials.password,
       });
       this.adminToken = response.data.token;
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error.response;
+    }
+  }
+
+  async registerUser(regData) {
+    try {
+      const response = await axios.post(`${config.baseUrl}/api/users`, {
+        name: regData.name,
+        email: regData.email,
+        password: regData.password,
+      });
       return response;
     } catch (error) {
       console.log(error);
@@ -28,6 +48,7 @@ class ApiHandler {
       });
       return response;
     } catch (error) {
+      console.log(error);
       return error.response;
     }
   }
@@ -39,6 +60,7 @@ class ApiHandler {
       });
       return response;
     } catch (error) {
+      console.log(error);
       return error.response;
     }
   }

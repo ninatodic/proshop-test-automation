@@ -2,12 +2,12 @@ const expect = require('chai').expect;
 const config = require('../../config/config');
 const { loginCredentials } = require('../../testData/loginCredentials');
 const LoginPage = require('../../pageObjects/LoginPage');
-const Navbar = require('../../pageObjects/NavBar');
-const VerificationsUI = require('../../verifications/VerificationsUI');
+const Navbar = require('../../pageObjects/components/NavBar');
+const Verifications = require('../../verifications/VerificationsLoginSpec');
 
 const loginPage = new LoginPage();
 const navBar = new Navbar();
-const verify = new VerificationsUI();
+const verify = new Verifications();
 
 describe('Login suite', () => {
   beforeEach(async () => {
@@ -25,13 +25,19 @@ describe('Login suite', () => {
   });
 
   it('should login as administrator', async () => {
-    await loginPage.login(loginCredentials.adminCredentials);
+    await loginPage.login({
+      email: config.adminEmail,
+      password: config.adminPassword,
+    });
     await verify.userIsAdministrator();
     await navBar.logout();
   });
 
-  it('should login as customer', async () => {
-    await loginPage.login(loginCredentials.customerCredentials);
+  it('should login as user', async () => {
+    await loginPage.login({
+      email: config.userEmail,
+      password: config.userPassword,
+    });
     await verify.userIsNotAdministrator();
     await navBar.logout();
   });

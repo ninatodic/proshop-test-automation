@@ -97,6 +97,20 @@ class BasePage {
     }
   }
 
+  //clear field then input text into text field
+  async clearAndInputTextIntoField(element, text) {
+    if (element) {
+      try {
+        await element.clear();
+        await element.sendKeys(text);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      console.log('element not selected');
+    }
+  }
+
   //click element
   async clickElement(element) {
     if (element) {

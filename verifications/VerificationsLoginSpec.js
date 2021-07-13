@@ -1,24 +1,11 @@
-const RegisterPage = require('../pageObjects/RegisterPage');
-const NavBar = require('../pageObjects/NavBar');
+const NavBar = require('../pageObjects/components/NavBar');
 const LoginPage = require('../pageObjects/LoginPage');
 const expect = require('chai').expect;
 
-const registerPage = new RegisterPage();
 const navBar = new NavBar();
 const loginPage = new LoginPage();
 
-class VerificationsUI {
-  async registrationErrorMessageIs(message) {
-    expect(
-      await registerPage.getTextFromElement(await registerPage.errorMsgElement)
-    ).to.equal(message);
-  }
-  async customerIsRegistered(data) {
-    expect(
-      await navBar.getTextFromElement(await navBar.userNameDoropdown)
-    ).to.eql(data.name.toUpperCase());
-  }
-
+class VerificationsLoginSpec {
   async loginErrorMessageIs(message) {
     expect(
       await loginPage.getTextFromElement(await loginPage.errorMsgElement)
@@ -36,4 +23,4 @@ class VerificationsUI {
   }
 }
 
-module.exports = VerificationsUI;
+module.exports = VerificationsLoginSpec;
