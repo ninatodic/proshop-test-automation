@@ -3,11 +3,11 @@ const config = require('./../../config/config');
 const { registrationData } = require('../../testData/registrationData');
 const RegisterPage = require('../../pageObjects/RegisterPage');
 const Verifications = require('../../verifications/VerificationsRegisterSpec');
-const ApiHandler = require('../../apiHelpers/ApiHandler');
+const UserApi = require('../../apiHelpers/UserApi');
 
 const registerPage = new RegisterPage();
 const verify = new Verifications();
-const api = new ApiHandler();
+const api = new UserApi();
 
 describe('Register suite', () => {
   beforeEach(async () => {

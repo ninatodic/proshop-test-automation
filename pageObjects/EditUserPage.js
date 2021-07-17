@@ -9,7 +9,7 @@ class EditUserPage extends BasePage {
     return this.getElementById('email');
   }
 
-  get isAdminCheckBox() {
+  get isAdminCheckbox() {
     return this.getElementById('isadmin');
   }
 
@@ -17,16 +17,28 @@ class EditUserPage extends BasePage {
     return this.getElementByClassName('btn-primary');
   }
 
-  async editUserName() {
-    await this.inputTextIntoField(await this.userNameField, ' edited');
+  get goBackBtn() {
+    return this.getElementByLinkText('GO BACK');
+  }
+
+  get errorMessageElement() {
+    return this.getElementByCss('.alert-danger');
+  }
+
+  async editUserName(name) {
+    await this.clearAndInputTextIntoField(await this.userNameField, name);
     await this.clickElement(await this.updateBtn);
   }
-  async editUserEmail() {
-    await this.clearAndInputTextIntoField(
-      await this.userEmailField,
-      'editedMail@example.com'
-    );
+  async editUserEmail(email) {
+    await this.clearAndInputTextIntoField(await this.userEmailField, email);
     await this.clickElement(await this.updateBtn);
+  }
+  async setUserToAdmin() {
+    await this.clickElement(await this.isAdminCheckbox);
+    await this.clickElement(await this.updateBtn);
+  }
+  async goBack() {
+    await this.clickElement(await this.goBackBtn);
   }
 }
 

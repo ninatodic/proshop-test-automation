@@ -1,9 +1,10 @@
 const expect = require('chai').expect;
-const ApiHandler = require('../apiHelpers/ApiHandler');
-const UsersDashboardPage = require('../pageObjects/UsersDashboardPage');
 
-const api = new ApiHandler();
+const UsersDashboardPage = require('../pageObjects/UsersDashboardPage');
+const EditUserPage = require('../pageObjects/EditUserPage');
+
 const usersDashboardPage = new UsersDashboardPage();
+const editUserPage = new EditUserPage();
 
 class VerificationsAdminSpec {
   async userDoesNotExist(userEmail) {
@@ -15,20 +16,48 @@ class VerificationsAdminSpec {
     expect(emails.includes(userEmail)).to.equal(false);
   }
 
-  async userNameWasUpdated(name) {
+  async userNameWasUpdated() {
     expect(
       await usersDashboardPage.getTextFromElement(
         await usersDashboardPage.lastUserName
       )
-    ).to.equal(`${name} edited`);
+    ).to.equal('Edited name');
   }
 
-  async userEmailWasUpdated(name) {
+  async userNameWasNotUpdated(name) {
+    expect(
+      await usersDashboardPage.getTextFromElement(
+        await usersDashboardPage.lastUserName
+      )
+    ).to.equal(name);
+  }
+
+  async userEmailWasUpdated() {
     expect(
       await usersDashboardPage.getTextFromElement(
         await usersDashboardPage.lastUserEmail
       )
-    ).to.equal('editedMail@example.com');
+    ).to.equal('editedEmail@example.com');
+  }
+
+  async userEmailWasNotUpdated(email) {
+    expect(
+      await usersDashboardPage.getTextFromElement(
+        await usersDashboardPage.lastUserEmail
+      )
+    ).to.equal(email);
+  }
+
+  async errorMessageIs(message) {
+    expect(
+      await editUserPage.getTextFromElement(
+        await editUserPage.errorMessageElement
+      )
+    ).to.have.string(message);
+  }
+
+  async userHasAdminPrivileges() {
+    // expect(usersDashboardPage.isAdminIcon).to.have.class('fa-check');
   }
 }
 

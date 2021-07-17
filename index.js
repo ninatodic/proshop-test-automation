@@ -6,20 +6,20 @@ require('geckodriver');
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const Mocha = require('mocha');
 const mochaOptions = require('./mochaOptions');
-var glob = require('glob');
+const glob = require('glob');
 const config = require('./config/config');
 
 //initialize mocha
 const mocha = new Mocha(mochaOptions);
 
-// //add all test files
-// glob('test/**/*.js', function (err, files) {
-//   files.forEach((file) => {
-//     mocha.addFile(file);
-//   });
-// });
+//add all test files
+glob('test/**/*.js', function (err, files) {
+  files.forEach((file) => {
+    mocha.addFile(file);
+  });
+});
 
-mocha.addFile('./test/ui/admin.spec.js');
+// mocha.addFile('./test/api/product.spec.js');
 
 //create driver and add it to global object
 const createDriver = async (browser) => {
