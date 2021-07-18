@@ -2,9 +2,11 @@ const expect = require('chai').expect;
 
 const UsersDashboardPage = require('../pageObjects/UsersDashboardPage');
 const EditUserPage = require('../pageObjects/EditUserPage');
+const ProductDashboardPage = require('../pageObjects/ProductDashboardPage');
 
 const usersDashboardPage = new UsersDashboardPage();
 const editUserPage = new EditUserPage();
+const productDashboardPage = new ProductDashboardPage();
 
 class VerificationsAdminSpec {
   async userDoesNotExist(userEmail) {
@@ -57,7 +59,19 @@ class VerificationsAdminSpec {
   }
 
   async userHasAdminPrivileges() {
-    // expect(usersDashboardPage.isAdminIcon).to.have.class('fa-check');
+    const element = await usersDashboardPage.isAdminIcon;
+    const elementClass = await element.getAttribute('class');
+
+    expect(elementClass).to.equal('fas fa-check');
+  }
+
+  async newProductCreated(before, after) {
+    expect(after - before).to.equal(1);
+  }
+
+  async productDeleted(productCount) {
+    let currentProductCount = await productDashboardPage.getCurrentTRCount();
+    expect(productCount - currentProductCount).to.equal(1);
   }
 }
 

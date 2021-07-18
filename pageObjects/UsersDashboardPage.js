@@ -11,7 +11,7 @@ class UsersDashboardPage extends BasePage {
   }
 
   get isAdminIcon() {
-    return this.getElementByClassName('tr:last-child > td:nth-child(4 > i)');
+    return this.getElementByCss('tr:last-child > td:nth-child(4) > i');
   }
 
   get lastUserEditBtn() {
@@ -31,15 +31,9 @@ class UsersDashboardPage extends BasePage {
     await this.clickElement(await this.lastUserEditBtn);
   }
 
-  async getCurrentUsersCount() {
-    await this.getElementByCss('tr');
-    return (await driver.findElements(By.css('tr'))).length;
-  }
-
   async waitUntilUserCountChanges(currentCount) {
-    console.log(currentCount);
     await driver.wait(async () => {
-      return (await this.getCurrentUsersCount()) !== currentCount;
+      return (await this.getCurrentTRCount()) !== currentCount;
     }, 5000);
   }
 }

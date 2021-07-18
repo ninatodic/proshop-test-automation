@@ -137,6 +137,27 @@ class BasePage {
       console.log('element not selected');
     }
   }
+
+  async getCurrentTRCount() {
+    await this.getElementByCss('tr');
+    return (await driver.findElements(By.css('tr'))).length;
+  }
+
+  async waitUntilTRCountChanges(currentCount) {
+    await driver.wait(async () => {
+      return (await this.getCurrentTRCount()) !== currentCount;
+    }, 5000);
+  }
+
+  async waitUntilUrlChanges(url) {
+    try {
+      await driver.wait(async () => {
+        return url !== (await driver.getCurrentUrl());
+      }, 10 * 1000);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 module.exports = BasePage;

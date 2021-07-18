@@ -4,6 +4,8 @@ const NavBar = require('../../pageObjects/components/NavBar');
 const UserDashboardPage = require('../../pageObjects/UsersDashboardPage');
 const VerificationsAdminSpec = require('../../verifications/VerificationsAdminSpec');
 const EditUserPage = require('../../pageObjects/EditUserPage');
+const ProductDashboardPage = require('../../pageObjects/ProductDashboardPage');
+const EditProductPage = require('../../pageObjects/EditProductPage');
 const config = require('../../config/config');
 const { registrationData } = require('../../testData/registrationData');
 
@@ -12,6 +14,8 @@ const api = new UserApi();
 const navBar = new NavBar();
 const userDashboardPage = new UserDashboardPage();
 const editUserPage = new EditUserPage();
+const productDashboardPage = new ProductDashboardPage();
+const editProductPage = new EditProductPage();
 const verify = new VerificationsAdminSpec();
 
 describe('Admin suite', () => {
@@ -67,12 +71,38 @@ describe('Admin suite', () => {
     });
 
     it('should delete user', async () => {
-      let currentUserCount = await userDashboardPage.getCurrentUsersCount();
+      let currentUserCount = await userDashboardPage.getCurrentTRCount();
       await userDashboardPage.deleteLastUser();
-      await userDashboardPage.waitUntilUserCountChanges(currentUserCount);
+      await userDashboardPage.waitUntilTRCountChanges(currentUserCount);
       await verify.userDoesNotExist(registrationData.correctData.email);
     });
   });
+
+  describe.only('Products dashboard', () => {
+    before('goto Product dashboard page', async () => {
+      await navBar.goToProductDashboard();
+    });
+    it('should create sample product', async () => {
+      let productCountBefore = await productDashboardPage.getCurrentTRCount();
+      await productDashboardPage.createSampleProduct();
+      await productDashboardPage.waitUntilUrlChanges(
+        `${config.baseUrl}/admin/productlist`
+      );
+      let url = await driver.getCurrentUrl();
+      await editProductPage.goBack();
+      await productDashboardPage.waitUntilUrlChanges(url);
+      let productCountAfter = await productDashboardPage.getCurrentTRCount();
+      await verify.newProductCreated(productCountBefore, productCountAfter);
+    });
+
+    it('should delete sample product', async () => {
+      let productCount = await productDashboardPage.getCurrentTRCount();
+      await productDashboardPage.deleteLastProduct();
+      await productDashboardPage.waitUntilTRCountChanges(productCount);
+      await verify.productDeleted(productCount);
+    });
+  });
+
   after('logout admin', async () => {
     await navBar.logout();
   });

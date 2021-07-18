@@ -13,6 +13,10 @@ class NavBar extends BasePage {
     return this.getElementByLinkText('Users');
   }
 
+  get adminDropdownProducts() {
+    return this.getElementByLinkText('Products');
+  }
+
   get userDropdownLogout() {
     return this.getElementByCss('.dropdown.nav-item > div > a:nth-child(2)');
   }
@@ -25,6 +29,11 @@ class NavBar extends BasePage {
   async goToUserDashboard() {
     await this.clickElement(await this.adminDoropdown);
     await this.clickElement(await this.adminDropdownUsers);
+  }
+
+  async goToProductDashboard() {
+    await this.clickElement(await this.adminDoropdown);
+    await this.clickElement(await this.adminDropdownProducts);
   }
 }
 

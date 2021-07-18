@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="2.5260" tests="2" failures="0">
+  <testsuite name="Root Suite" timestamp="2021-07-18T20:15:16" tests="0" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Admin suite" timestamp="2021-07-18T20:15:16" tests="0" file="C:\Users\Nina\Documents\proshop-test-automation\test\ui\admin.spec.js" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Products dashboard" timestamp="2021-07-18T20:15:19" tests="2" file="C:\Users\Nina\Documents\proshop-test-automation\test\ui\admin.spec.js" time="2.5260" failures="0">
+    <testcase name="Admin suite Products dashboard should create sample product" time="1.4570" classname="should create sample product">
+    </testcase>
+    <testcase name="Admin suite Products dashboard should delete sample product" time="1.0690" classname="should delete sample product">
+    </testcase>
+  </testsuite>
+</testsuites>

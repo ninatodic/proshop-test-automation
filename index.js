@@ -13,13 +13,13 @@ const config = require('./config/config');
 const mocha = new Mocha(mochaOptions);
 
 //add all test files
-glob('test/**/*.js', function (err, files) {
-  files.forEach((file) => {
-    mocha.addFile(file);
-  });
-});
+// glob('test/**/*.js', function (err, files) {
+//   files.forEach((file) => {
+//     mocha.addFile(file);
+//   });
+// });
 
-// mocha.addFile('./test/api/product.spec.js');
+mocha.addFile('./test/ui/admin.spec.js');
 
 //create driver and add it to global object
 const createDriver = async (browser) => {
