@@ -5,8 +5,23 @@ class ProductDashboardPage extends BasePage {
     return this.getElementByClassName('btn-primary');
   }
 
+  get lastProductName() {
+    return this.getElementByCss('tr:last-child > td:nth-child(2)');
+  }
+
+  get lastProductPrice() {
+    return this.getElementByCss('tr:last-child > td:nth-child(3)');
+  }
+
   get lastProductDeleteBtn() {
     return this.getElementByCss(' tr:last-child > td:last-child > button ');
+  }
+  get lastProductEditBtn() {
+    return this.getElementByCss('tr:last-child > td:nth-child(6) > a');
+  }
+
+  async goToProductEditPage() {
+    await this.clickElement(await this.lastProductEditBtn);
   }
 
   async deleteLastProduct() {

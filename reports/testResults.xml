@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="2.5260" tests="2" failures="0">
-  <testsuite name="Root Suite" timestamp="2021-07-18T20:15:16" tests="0" time="0.0000" failures="0">
+<testsuites name="Mocha Tests" time="40.8610" tests="1" failures="1">
+  <testsuite name="Root Suite" timestamp="2021-07-21T09:17:25" tests="0" time="0.0000" failures="0">
   </testsuite>
-  <testsuite name="Admin suite" timestamp="2021-07-18T20:15:16" tests="0" file="C:\Users\Nina\Documents\proshop-test-automation\test\ui\admin.spec.js" time="0.0000" failures="0">
+  <testsuite name="Admin suite" timestamp="2021-07-21T09:17:25" tests="0" file="C:\Users\Nina\Documents\proshop-test-automation\test\ui\admin.spec.js" time="0.0000" failures="0">
   </testsuite>
-  <testsuite name="Products dashboard" timestamp="2021-07-18T20:15:19" tests="2" file="C:\Users\Nina\Documents\proshop-test-automation\test\ui\admin.spec.js" time="2.5260" failures="0">
-    <testcase name="Admin suite Products dashboard should create sample product" time="1.4570" classname="should create sample product">
-    </testcase>
-    <testcase name="Admin suite Products dashboard should delete sample product" time="1.0690" classname="should delete sample product">
+  <testsuite name="Products dashboard" timestamp="2021-07-21T09:17:27" tests="1" file="C:\Users\Nina\Documents\proshop-test-automation\test\ui\admin.spec.js" time="40.8610" failures="1">
+    <testcase name="Admin suite Products dashboard should display error if empty name field updated" time="40.8610" classname="should display error if empty name field updated">
+      <failure message="expected undefined to be a string" type="AssertionError"><![CDATA[AssertionError: expected undefined to be a string
+    at VerificationsAdminSpec.productEditErrorMessageIs (verifications\VerificationsAdminSpec.js:96:15)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async Context.<anonymous> (test\ui\admin.spec.js:107:7)]]></failure>
     </testcase>
   </testsuite>
 </testsuites>

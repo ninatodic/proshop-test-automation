@@ -7,10 +7,11 @@ const EditUserPage = require('../../pageObjects/EditUserPage');
 const ProductDashboardPage = require('../../pageObjects/ProductDashboardPage');
 const EditProductPage = require('../../pageObjects/EditProductPage');
 const config = require('../../config/config');
-const { registrationData } = require('../../testData/registrationData');
+const registrationData = require('../../testData/registrationData');
+const productData = require('../../testData/productData');
 
 const loginPage = new LoginPage();
-const api = new UserApi();
+const usersApi = new UserApi();
 const navBar = new NavBar();
 const userDashboardPage = new UserDashboardPage();
 const editUserPage = new EditUserPage();
@@ -29,7 +30,7 @@ describe('Admin suite', () => {
 
   describe('Users dashboard', () => {
     before('Register a user', async () => {
-      await api.registerUser(registrationData.correctData);
+      await usersApi.registerUser(registrationData.correctData);
       await navBar.goToUserDashboard();
     });
 
@@ -60,7 +61,9 @@ describe('Admin suite', () => {
     it('should not update if email of other user used', async () => {
       await userDashboardPage.goToUserEditPage();
       await editUserPage.editUserEmail(config.adminEmail);
-      await verify.errorMessageIs('E11000 duplicate key error collection:');
+      await verify.userEditErrorMessageIs(
+        'E11000 duplicate key error collection:'
+      );
       await editUserPage.goBack();
     });
 
@@ -79,20 +82,60 @@ describe('Admin suite', () => {
   });
 
   describe.only('Products dashboard', () => {
-    before('goto Product dashboard page', async () => {
+    beforeEach('goto Product dashboard page', async () => {
       await navBar.goToProductDashboard();
     });
     it('should create sample product', async () => {
       let productCountBefore = await productDashboardPage.getCurrentTRCount();
       await productDashboardPage.createSampleProduct();
-      await productDashboardPage.waitUntilUrlChanges(
-        `${config.baseUrl}/admin/productlist`
-      );
-      let url = await driver.getCurrentUrl();
+      await driver.wait(until.urlContains('edit'), 5000);
       await editProductPage.goBack();
-      await productDashboardPage.waitUntilUrlChanges(url);
+      await driver.wait(
+        until.urlIs('http://proshopappnina.herokuapp.com/admin/productlist'),
+        2000
+      );
       let productCountAfter = await productDashboardPage.getCurrentTRCount();
       await verify.newProductCreated(productCountBefore, productCountAfter);
+    });
+
+    it.only('should display error if empty name field updated', async () => {
+      await productDashboardPage.goToProductEditPage();
+      await editProductPage.editProductField(
+        await editProductPage.nameField,
+        ''
+      );
+      await verify.productEditErrorMessageIs(
+        'Product validation failed: name: Path `name` is required.'
+      );
+    });
+
+    it('should edit product name', async () => {
+      await productDashboardPage.goToProductEditPage();
+      await editProductPage.editProductField(
+        await editProductPage.nameField,
+        productData.editedSampleProduct.name
+      );
+      await verify.productNameWasUpdated();
+    });
+
+    it('should display error if empty price field updated', async () => {
+      await productDashboardPage.goToProductEditPage();
+      await editProductPage.editProductField(
+        await editProductPage.priceField,
+        ''
+      );
+      await verify.productEditErrorMessageIs(
+        'Product validation failed: price: Path `price` is required.'
+      );
+    });
+
+    it('should edit product price', async () => {
+      await productDashboardPage.goToProductEditPage();
+      await editProductPage.editProductField(
+        await editProductPage.priceField,
+        productData.editedSampleProduct.price
+      );
+      await verify.productPriceWasUpdated();
     });
 
     it('should delete sample product', async () => {

@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const config = require('./../../config/config');
-const { registrationData } = require('../../testData/registrationData');
+const registrationData = require('../../testData/registrationData');
 const RegisterPage = require('../../pageObjects/RegisterPage');
 const Verifications = require('../../verifications/VerificationsRegisterSpec');
 const UserApi = require('../../apiHelpers/UserApi');

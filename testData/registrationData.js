@@ -28,4 +28,4 @@ const registrationData = {
   },
 };
 
-module.exports = { registrationData };
+module.exports = registrationData;

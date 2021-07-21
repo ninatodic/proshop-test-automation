@@ -7,4 +7,4 @@ const loginCredentials = {
   },
 };
 
-module.exports = { loginCredentials };
+module.exports = loginCredentials;

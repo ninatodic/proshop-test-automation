@@ -30,12 +30,6 @@ class UsersDashboardPage extends BasePage {
   async goToUserEditPage() {
     await this.clickElement(await this.lastUserEditBtn);
   }
-
-  async waitUntilUserCountChanges(currentCount) {
-    await driver.wait(async () => {
-      return (await this.getCurrentTRCount()) !== currentCount;
-    }, 5000);
-  }
 }
 
 module.exports = UsersDashboardPage;

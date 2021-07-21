@@ -9,7 +9,7 @@ class BasePage {
       let element = await driver.wait(until.elementLocated(By.id(id)), timeout);
       return element;
     } catch (err) {
-      if (log) console.log(err);
+      if (log) console.log(err.message);
       return false;
     }
   }
@@ -23,7 +23,7 @@ class BasePage {
       );
       return element;
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
       return false;
     }
   }
@@ -37,7 +37,7 @@ class BasePage {
       );
       return element;
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
       return false;
     }
   }
@@ -51,7 +51,7 @@ class BasePage {
       );
       return element;
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
       return false;
     }
   }
@@ -65,7 +65,7 @@ class BasePage {
       );
       return element;
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
       return false;
     }
   }
@@ -79,7 +79,7 @@ class BasePage {
       );
       return element;
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
       return false;
     }
   }
@@ -90,7 +90,7 @@ class BasePage {
       try {
         await element.sendKeys(text);
       } catch (err) {
-        console.log(err);
+        console.log(err.message);
       }
     } else {
       console.log('element not selected');
@@ -104,7 +104,7 @@ class BasePage {
         await element.clear();
         await element.sendKeys(text);
       } catch (err) {
-        console.log(err);
+        console.log(err.message);
       }
     } else {
       console.log('element not selected');
@@ -117,7 +117,7 @@ class BasePage {
       try {
         await element.click();
       } catch (err) {
-        console.log(err);
+        console.log(err.message);
       }
     } else {
       console.log('element not selected');
@@ -130,7 +130,7 @@ class BasePage {
         let text = await element.getText();
         return text;
       } catch (err) {
-        console.log(err);
+        console.log(err.message);
         return false;
       }
     } else {
@@ -155,7 +155,7 @@ class BasePage {
         return url !== (await driver.getCurrentUrl());
       }, 10 * 1000);
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   }
 }

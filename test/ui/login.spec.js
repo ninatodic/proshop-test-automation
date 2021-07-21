@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const config = require('../../config/config');
-const { loginCredentials } = require('../../testData/loginCredentials');
+const loginCredentials = require('../../testData/loginCredentials');
 const LoginPage = require('../../pageObjects/LoginPage');
 const Navbar = require('../../pageObjects/components/NavBar');
 const Verifications = require('../../verifications/VerificationsLoginSpec');

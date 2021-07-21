@@ -3,9 +3,12 @@ const expect = require('chai').expect;
 const UsersDashboardPage = require('../pageObjects/UsersDashboardPage');
 const EditUserPage = require('../pageObjects/EditUserPage');
 const ProductDashboardPage = require('../pageObjects/ProductDashboardPage');
+const EditProductPage = require('../pageObjects/EditProductPage');
+const productData = require('../testData/productData');
 
 const usersDashboardPage = new UsersDashboardPage();
 const editUserPage = new EditUserPage();
+const editProductPage = new EditProductPage();
 const productDashboardPage = new ProductDashboardPage();
 
 class VerificationsAdminSpec {
@@ -50,7 +53,7 @@ class VerificationsAdminSpec {
     ).to.equal(email);
   }
 
-  async errorMessageIs(message) {
+  async userEditErrorMessageIs(message) {
     expect(
       await editUserPage.getTextFromElement(
         await editUserPage.errorMessageElement
@@ -69,6 +72,29 @@ class VerificationsAdminSpec {
     expect(after - before).to.equal(1);
   }
 
+  async productNameWasUpdated() {
+    expect(
+      await productDashboardPage.getTextFromElement(
+        await productDashboardPage.lastProductName
+      )
+    ).to.equal(productData.editedSampleProduct.name);
+  }
+
+  async productPriceWasUpdated() {
+    expect(
+      await productDashboardPage.getTextFromElement(
+        await productDashboardPage.lastProductPrice
+      )
+    ).to.equal(`$${productData.editedSampleProduct.price}`);
+  }
+
+  async productEditErrorMessageIs(message) {
+    expect(
+      await editProductPage.getTextFromElement(
+        await editProductPage.errorMessageElement
+      )
+    ).to.have.string(message);
+  }
   async productDeleted(productCount) {
     let currentProductCount = await productDashboardPage.getCurrentTRCount();
     expect(productCount - currentProductCount).to.equal(1);
