@@ -82,27 +82,32 @@ describe('Admin suite', () => {
   });
 
   describe.only('Products dashboard', () => {
+    let productId = '';
+
     beforeEach('goto Product dashboard page', async () => {
       await navBar.goToProductDashboard();
     });
+
     it('should create sample product', async () => {
       let productCountBefore = await productDashboardPage.getCurrentTRCount();
       await productDashboardPage.createSampleProduct();
       await driver.wait(until.urlContains('edit'), 5000);
       await editProductPage.goBack();
       await driver.wait(
-        until.urlIs('http://proshopappnina.herokuapp.com/admin/productlist'),
-        2000
+        until.urlIs(`${config.baseUrl}/admin/productlist`),
+        4000
       );
       let productCountAfter = await productDashboardPage.getCurrentTRCount();
       await verify.newProductCreated(productCountBefore, productCountAfter);
+      productId = await productDashboardPage.getTextFromElement(
+        await productDashboardPage.lastProductId
+      );
     });
 
-    it.only('should display error if empty name field updated', async () => {
+    it('should display error if empty name field updated', async () => {
       await productDashboardPage.goToProductEditPage();
-      await editProductPage.editProductField(
-        await editProductPage.nameField,
-        ''
+      await editProductPage.clearAndUpdateField(
+        await editProductPage.nameField
       );
       await verify.productEditErrorMessageIs(
         'Product validation failed: name: Path `name` is required.'
@@ -120,9 +125,8 @@ describe('Admin suite', () => {
 
     it('should display error if empty price field updated', async () => {
       await productDashboardPage.goToProductEditPage();
-      await editProductPage.editProductField(
-        await editProductPage.priceField,
-        ''
+      await editProductPage.clearAndUpdateField(
+        await editProductPage.priceField
       );
       await verify.productEditErrorMessageIs(
         'Product validation failed: price: Path `price` is required.'
@@ -136,6 +140,90 @@ describe('Admin suite', () => {
         productData.editedSampleProduct.price
       );
       await verify.productPriceWasUpdated();
+    });
+
+    it('should display error if empty brand field updated', async () => {
+      await productDashboardPage.goToProductEditPage();
+      await editProductPage.clearAndUpdateField(
+        await editProductPage.brandField
+      );
+      await verify.productEditErrorMessageIs(
+        'Product validation failed: brand: Path `brand` is required.'
+      );
+    });
+
+    it('should edit product brand', async () => {
+      await productDashboardPage.goToProductEditPage();
+      await editProductPage.editProductField(
+        await editProductPage.brandField,
+        productData.editedSampleProduct.brand
+      );
+      await verify.productBrandWasUpdated();
+    });
+
+    it('should display error if empty category field updated', async () => {
+      await productDashboardPage.goToProductEditPage();
+      await editProductPage.clearAndUpdateField(
+        await editProductPage.categoryField
+      );
+      await verify.productEditErrorMessageIs(
+        'Product validation failed: category: Path `category` is required.'
+      );
+    });
+
+    it('should edit product category', async () => {
+      await productDashboardPage.goToProductEditPage();
+      await editProductPage.editProductField(
+        await editProductPage.categoryField,
+        productData.editedSampleProduct.category
+      );
+      await verify.productCategoryWasUpdated();
+    });
+
+    it('should display error if empty count in stock field updated', async () => {
+      await productDashboardPage.goToProductEditPage();
+      await editProductPage.clearAndUpdateField(
+        await editProductPage.countInStockField
+      );
+      await verify.productEditErrorMessageIs(
+        'Product validation failed: countInStock: Path `countInStock` is required.'
+      );
+    });
+
+    it('should edit product count in stock', async () => {
+      await productDashboardPage.goToProductEditPage();
+      await editProductPage.editProductField(
+        await editProductPage.countInStockField,
+        productData.editedSampleProduct.countInStock
+      );
+      await driver.wait(
+        until.urlIs(`${config.baseUrl}/admin/productlist`),
+        4000
+      );
+      await verify.productCountInStockWasUpdated(productId);
+    });
+
+    it('should display error if empty description field updated', async () => {
+      await productDashboardPage.goToProductEditPage();
+      await editProductPage.clearAndUpdateField(
+        await editProductPage.descriptionField
+      );
+      await verify.productEditErrorMessageIs(
+        'Product validation failed: description: Path `description` is required.'
+      );
+    });
+
+    it('should edit product description', async () => {
+      await productDashboardPage.goToProductEditPage();
+      await editProductPage.editProductField(
+        await editProductPage.descriptionField,
+        productData.editedSampleProduct.description
+      );
+      await driver.wait(
+        until.urlIs(`${config.baseUrl}/admin/productlist`),
+        4000
+      );
+      await verify.productDescriptionWasUpdated(productId);
     });
 
     it('should delete sample product', async () => {

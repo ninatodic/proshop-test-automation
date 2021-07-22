@@ -111,6 +111,20 @@ class BasePage {
     }
   }
 
+  async clearField(element, text) {
+    if (element) {
+      try {
+        while ((await element.getAttribute('value')) != '') {
+          element.sendKeys(Key.BACK_SPACE);
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
+    } else {
+      console.log('element not selected');
+    }
+  }
+
   //click element
   async clickElement(element) {
     if (element) {

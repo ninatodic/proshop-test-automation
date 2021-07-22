@@ -4,12 +4,14 @@ const UsersDashboardPage = require('../pageObjects/UsersDashboardPage');
 const EditUserPage = require('../pageObjects/EditUserPage');
 const ProductDashboardPage = require('../pageObjects/ProductDashboardPage');
 const EditProductPage = require('../pageObjects/EditProductPage');
+const ProductApi = require('../apiHelpers/ProductApi');
 const productData = require('../testData/productData');
 
 const usersDashboardPage = new UsersDashboardPage();
 const editUserPage = new EditUserPage();
 const editProductPage = new EditProductPage();
 const productDashboardPage = new ProductDashboardPage();
+const api = new ProductApi();
 
 class VerificationsAdminSpec {
   async userDoesNotExist(userEmail) {
@@ -86,6 +88,36 @@ class VerificationsAdminSpec {
         await productDashboardPage.lastProductPrice
       )
     ).to.equal(`$${productData.editedSampleProduct.price}`);
+  }
+
+  async productBrandWasUpdated() {
+    expect(
+      await productDashboardPage.getTextFromElement(
+        await productDashboardPage.lastProductBrand
+      )
+    ).to.equal(productData.editedSampleProduct.brand);
+  }
+
+  async productCategoryWasUpdated() {
+    expect(
+      await productDashboardPage.getTextFromElement(
+        await productDashboardPage.lastProductCategory
+      )
+    ).to.equal(productData.editedSampleProduct.category);
+  }
+
+  async productCountInStockWasUpdated(productId) {
+    const response = await api.getProduct(productId);
+    expect(response.data.countInStock).to.equal(
+      productData.editedSampleProduct.countInStock
+    );
+  }
+
+  async productDescriptionWasUpdated(productId) {
+    const response = await api.getProduct(productId);
+    expect(response.data.description).to.equal(
+      productData.editedSampleProduct.description
+    );
   }
 
   async productEditErrorMessageIs(message) {

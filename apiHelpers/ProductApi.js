@@ -17,6 +17,16 @@ class ProductApi extends BaseApi {
     }
   }
 
+  async getProduct(id) {
+    try {
+      const response = await this.api.get(`/api/products/${id}`);
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error.response;
+    }
+  }
+
   async deleteProduct(id) {
     try {
       const response = await this.api.delete(`/api/products/${id}`, {

@@ -15,14 +15,15 @@ class EditProductPage extends BasePage {
     return this.getElementById('brand');
   }
   get countInStockField() {
-    return this.getElementByid('countInStock');
+    return this.getElementById('countInStock');
   }
   get categoryField() {
     return this.getElementById('category');
   }
   get descriptionField() {
-    return this.getElementByid('description');
+    return this.getElementById('description');
   }
+
   get updateBtn() {
     return this.getElementByClassName('btn-primary');
   }
@@ -36,9 +37,12 @@ class EditProductPage extends BasePage {
 
   async editProductField(field, inputData) {
     await this.clearAndInputTextIntoField(field, inputData);
-    await driver.sleep(5000);
     await this.clickElement(await this.updateBtn);
-    await driver.sleep(15000);
+  }
+
+  async clearAndUpdateField(field) {
+    await this.clearField(field);
+    await this.clickElement(await this.updateBtn);
   }
 }
 
