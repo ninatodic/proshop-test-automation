@@ -1,10 +1,7 @@
+const { Driver } = require('selenium-webdriver/edge');
 const BasePage = require('../BasePage');
 
 class NavBar extends BasePage {
-  get userNameDoropdown() {
-    return this.getElementById('username');
-  }
-
   get adminDoropdown() {
     return this.getElementById('adminmenu', undefined, false);
   }
@@ -17,13 +14,26 @@ class NavBar extends BasePage {
     return this.getElementByLinkText('Products');
   }
 
+  get userNameDoropdown() {
+    return this.getElementById('username');
+  }
+
   get userDropdownLogout() {
-    return this.getElementByCss('.dropdown.nav-item > div > a:nth-child(2)');
+    return this.getElementByLinkText('Logout');
+  }
+
+  get userDropdownProfile() {
+    return this.getElementByLinkText('Profile');
   }
 
   async logout() {
     await this.clickElement(await this.userNameDoropdown);
     await this.clickElement(await this.userDropdownLogout);
+  }
+
+  async goToUserProfilePage() {
+    await this.clickElement(await this.userNameDoropdown);
+    await this.clickElement(await this.userDropdownProfile);
   }
 
   async goToUserDashboard() {

@@ -13,18 +13,46 @@ const config = require('./config/config');
 //initialize mocha
 const mocha = new Mocha(mochaOptions);
 
-// add all test files
-glob('test/**/*.js', function (err, files) {
-  files.forEach((file) => {
-    mocha.addFile(file);
-  });
-});
-
-// mocha.addFile('./test/ui/admin.spec.js');
-
 //initialize chromeOptions and add arguments
 const chromeOptions = new chrome.Options();
 chromeOptions.addArguments('start-maximized');
+
+//initialize firefoxOptions and add arguments
+const firefoxOptions = new firefox.Options();
+
+if (!config.file && !config.directory) {
+  // add all test files
+  glob('test/**/*.js', function (err, files) {
+    files.forEach((file) => {
+      mocha.addFile(file);
+    });
+  });
+} else if (!config.file && config.directory) {
+  //add all test files in a directory
+  glob(`test/${config.directory}/*.js`, function (err, files) {
+    files.forEach((file) => {
+      mocha.addFile(file);
+    });
+  });
+
+  if (config.directory === 'api') {
+    chromeOptions.addArguments('headless');
+    firefoxOptions.addArguments('--headless');
+  }
+} else if (config.file && config.directory) {
+  //add one test file
+  try {
+    mocha.addFile(`./test/${config.directory}/${config.file}`);
+  } catch (error) {
+    console.log('Please enter correct name of a file and a directory');
+  }
+  if (config.directory === 'api') {
+    chromeOptions.addArguments('headless');
+    firefoxOptions.addArguments('--headless');
+  }
+} else {
+  console.log('Please enter directory name as well');
+}
 
 //create driver and add it to global object
 
@@ -35,7 +63,10 @@ const createDriver = async (browser) => {
       .withCapabilities(chromeOptions)
       .build();
   } else {
-    return await new Builder().forBrowser(browser).build();
+    return await new Builder()
+      .forBrowser(browser)
+      .withCapabilities(firefoxOptions)
+      .build();
   }
 };
 

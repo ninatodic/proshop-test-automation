@@ -81,7 +81,7 @@ describe('Admin suite', () => {
     });
   });
 
-  describe.only('Products dashboard', () => {
+  describe('Products dashboard', () => {
     let productId = '';
 
     beforeEach('goto Product dashboard page', async () => {
@@ -233,6 +233,8 @@ describe('Admin suite', () => {
       await verify.productDeleted(productCount);
     });
   });
+
+  describe('Orders dashboard', () => {});
 
   after('logout admin', async () => {
     await navBar.logout();

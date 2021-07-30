@@ -1,6 +1,9 @@
 const BasePage = require('./BasePage');
 
 class LoginPage extends BasePage {
+  get signInTitle() {
+    return this.getElementByCss('#root h1');
+  }
   get emailField() {
     return this.getElementById('email');
   }

@@ -1,5 +1,4 @@
 const BaseApi = require('./BaseApi');
-const { regData } = require('../testData/registrationData');
 
 class UserApi extends BaseApi {
   async registerUser(regData) {
@@ -36,6 +35,20 @@ class UserApi extends BaseApi {
       return response;
     } catch (error) {
       console.log(error);
+      return error.response;
+    }
+  }
+
+  async loginUser(email, password, log = true) {
+    try {
+      const response = await this.api.post(`/api/users/login`, {
+        email: email,
+        password: password,
+      });
+
+      return response;
+    } catch (error) {
+      if (log) console.log(error);
       return error.response;
     }
   }

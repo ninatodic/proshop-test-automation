@@ -4,8 +4,10 @@ const registrationData = require('../../testData/registrationData');
 const RegisterPage = require('../../pageObjects/RegisterPage');
 const Verifications = require('../../verifications/VerificationsRegisterSpec');
 const UserApi = require('../../apiHelpers/UserApi');
+const NavBar = require('../../pageObjects/components/NavBar');
 
 const registerPage = new RegisterPage();
+const navBar = new NavBar();
 const verify = new Verifications();
 const api = new UserApi();
 
@@ -43,6 +45,7 @@ describe('Register suite', () => {
   it('should succesfully register a user', async () => {
     await registerPage.registerUser(registrationData.correctData);
     await verify.userIsRegistered(registrationData.correctData);
+    await navBar.logout();
   });
 
   it('should not register a user with existing email', async () => {

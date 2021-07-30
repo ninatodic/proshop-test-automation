@@ -20,7 +20,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "chai": "^4.3.4",
-    "chai-as-promised": "^7.1.1",
+    "chai-dom": "^1.9.0",
     "chromedriver": "^91.0.1",
     "dotenv": "^10.0.0",
     "geckodriver": "^2.0.1",

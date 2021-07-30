@@ -111,7 +111,7 @@ class BasePage {
     }
   }
 
-  async clearField(element, text) {
+  async clearField(element) {
     if (element) {
       try {
         while ((await element.getAttribute('value')) != '') {
@@ -158,18 +158,24 @@ class BasePage {
   }
 
   async waitUntilTRCountChanges(currentCount) {
-    await driver.wait(async () => {
-      return (await this.getCurrentTRCount()) !== currentCount;
-    }, 5000);
-  }
-
-  async waitUntilUrlChanges(url) {
     try {
       await driver.wait(async () => {
-        return url !== (await driver.getCurrentUrl());
-      }, 10 * 1000);
-    } catch (err) {
-      console.log(err.message);
+        return (await this.getCurrentTRCount()) !== currentCount;
+      }, 5000);
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  async getLocalStorageItem(key) {
+    try {
+      return await driver.executeScript(
+        `return window.localStorage.getItem("${key}");`
+      );
+    } catch (error) {
+      return false;
+      console.log(error);
     }
   }
 }

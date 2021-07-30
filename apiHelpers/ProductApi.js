@@ -17,6 +17,22 @@ class ProductApi extends BaseApi {
     }
   }
 
+  async editProduct(product) {
+    try {
+      const response = await this.api.put(
+        `/api/products/${product._id}`,
+        product,
+        {
+          headers: { Authorization: `Bearer ${this.adminToken}` },
+        }
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error.response;
+    }
+  }
+
   async getProduct(id) {
     try {
       const response = await this.api.get(`/api/products/${id}`);

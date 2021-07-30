@@ -1,37 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="28.4340" tests="14" failures="0">
-  <testsuite name="Root Suite" timestamp="2021-07-22T08:34:09" tests="0" time="0.0000" failures="0">
+<testsuites name="Mocha Tests" time="21.8730" tests="14" failures="0">
+  <testsuite name="Root Suite" timestamp="2021-07-30T20:36:47" tests="0" time="0.0000" failures="0">
   </testsuite>
-  <testsuite name="Admin suite" timestamp="2021-07-22T08:34:09" tests="0" file="C:\Users\Nina\Documents\proshop-test-automation\test\ui\admin.spec.js" time="0.0000" failures="0">
-  </testsuite>
-  <testsuite name="Products dashboard" timestamp="2021-07-22T08:34:11" tests="14" file="C:\Users\Nina\Documents\proshop-test-automation\test\ui\admin.spec.js" time="28.4340" failures="0">
-    <testcase name="Admin suite Products dashboard should create sample product" time="1.2370" classname="should create sample product">
+  <testsuite name="Order suite" timestamp="2021-07-30T20:36:47" tests="14" file="C:\Users\Nina\Documents\proshop-test-automation\test\ui\order.spec.js" time="21.8730" failures="0">
+    <testcase name="Order suite should add product to the cart" time="2.5140" classname="should add product to the cart">
     </testcase>
-    <testcase name="Admin suite Products dashboard should display error if empty name field updated" time="1.0530" classname="should display error if empty name field updated">
+    <testcase name="Order suite should add multiple product to the cart" time="2.1270" classname="should add multiple product to the cart">
     </testcase>
-    <testcase name="Admin suite Products dashboard should edit product name" time="1.6920" classname="should edit product name">
+    <testcase name="Order suite should change product quantity in the cart" time="0.8820" classname="should change product quantity in the cart">
     </testcase>
-    <testcase name="Admin suite Products dashboard should display error if empty price field updated" time="0.7040" classname="should display error if empty price field updated">
+    <testcase name="Order suite should remove product from the cart" time="0.7110" classname="should remove product from the cart">
     </testcase>
-    <testcase name="Admin suite Products dashboard should edit product price" time="1.5880" classname="should edit product price">
+    <testcase name="Order suite should ask for sign in when proceeding to checkout if no user logged in" time="0.6910" classname="should ask for sign in when proceeding to checkout if no user logged in">
     </testcase>
-    <testcase name="Admin suite Products dashboard should display error if empty brand field updated" time="1.0060" classname="should display error if empty brand field updated">
+    <testcase name="Order suite should proceed to checkout after user login" time="2.6470" classname="should proceed to checkout after user login">
     </testcase>
-    <testcase name="Admin suite Products dashboard should edit product brand" time="1.6580" classname="should edit product brand">
+    <testcase name="Order suite should not ask for sing in when proceeding to checkout if user is previously logged in" time="3.0520" classname="should not ask for sing in when proceeding to checkout if user is previously logged in">
     </testcase>
-    <testcase name="Admin suite Products dashboard should display error if empty category field updated" time="1.0330" classname="should display error if empty category field updated">
+    <testcase name="Order suite should not proceed to payment method if address field is not filled" time="1.5370" classname="should not proceed to payment method if address field is not filled">
     </testcase>
-    <testcase name="Admin suite Products dashboard should edit product category" time="1.7110" classname="should edit product category">
+    <testcase name="Order suite should not proceed to payment method if city field is not filled" time="1.4450" classname="should not proceed to payment method if city field is not filled">
     </testcase>
-    <testcase name="Admin suite Products dashboard should display error if empty count in stock field updated" time="0.7280" classname="should display error if empty count in stock field updated">
+    <testcase name="Order suite should not proceed to payment method if postalCode field is not filled" time="1.5380" classname="should not proceed to payment method if postalCode field is not filled">
     </testcase>
-    <testcase name="Admin suite Products dashboard should edit product count in stock" time="12.5180" classname="should edit product count in stock">
+    <testcase name="Order suite should not proceed to payment method if country field is not filled" time="1.4880" classname="should not proceed to payment method if country field is not filled">
     </testcase>
-    <testcase name="Admin suite Products dashboard should display error if empty description field updated" time="1.1690" classname="should display error if empty description field updated">
+    <testcase name="Order suite should proceed to payment method if all fields are filled" time="1.6210" classname="should proceed to payment method if all fields are filled">
     </testcase>
-    <testcase name="Admin suite Products dashboard should edit product description" time="1.5300" classname="should edit product description">
+    <testcase name="Order suite should select payment method and proceed to &quot;place and order&quot; tab" time="0.8910" classname="should select payment method and proceed to &quot;place and order&quot; tab">
     </testcase>
-    <testcase name="Admin suite Products dashboard should delete sample product" time="0.8070" classname="should delete sample product">
+    <testcase name="Order suite should create an order" time="0.7290" classname="should create an order">
     </testcase>
   </testsuite>
 </testsuites>
