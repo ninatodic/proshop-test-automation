@@ -21,6 +21,8 @@ Create a .env file in then root and add the following
 
 `npm install`
 
+## Config file
+
 In config file set browser, directory and file.
 
 Supported browser chrome and firefox.
