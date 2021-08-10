@@ -32,5 +32,7 @@ To run api tests set directory to api.
 To run ui tests set directory to ui.
 To run single spec set directory and file name
 
-##To run tests
+## Run tests
+
+To run tests
 `npm test`
