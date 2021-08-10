@@ -60,7 +60,6 @@ class CartPage extends BasePage {
           By.className('list-group-item')
         );
         return products.length < currentCount;
-        console.log('ovone bi treb');
       }, 10 * 1000);
     } catch (error) {
       console.log(error);

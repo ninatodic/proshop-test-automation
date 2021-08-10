@@ -10,8 +10,9 @@ const {
 
 const config = {
   browser: 'chrome',
-  file: '',
-  directory: '',
+  spec: 'register.spec.js',
+  suite: 'ui',
+  headless: false,
   baseUrl: PS_BASE_URL,
   adminName: PS_ADMIN_NAME,
   adminEmail: PS_ADMIN_EMAIL,

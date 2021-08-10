@@ -22,6 +22,7 @@ const verify = new VerificationsAdminSpec();
 describe('Admin suite', () => {
   before('Login as administrator', async () => {
     await driver.get(`${config.baseUrl}/login`);
+
     await loginPage.login({
       email: config.adminEmail,
       password: config.adminPassword,

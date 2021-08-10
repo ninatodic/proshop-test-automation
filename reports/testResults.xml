@@ -1,35 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="21.8730" tests="14" failures="0">
-  <testsuite name="Root Suite" timestamp="2021-07-30T20:36:47" tests="0" time="0.0000" failures="0">
+<testsuites name="Mocha Tests" time="21.6080" tests="6" failures="0">
+  <testsuite name="Root Suite" timestamp="2021-08-10T19:48:09" tests="0" time="0.0000" failures="0">
   </testsuite>
-  <testsuite name="Order suite" timestamp="2021-07-30T20:36:47" tests="14" file="C:\Users\Nina\Documents\proshop-test-automation\test\ui\order.spec.js" time="21.8730" failures="0">
-    <testcase name="Order suite should add product to the cart" time="2.5140" classname="should add product to the cart">
+  <testsuite name="Register suite" timestamp="2021-08-10T19:48:09" tests="6" file="C:\Users\Nina\Documents\proshop-test-automation\test\ui\register.spec.js" time="21.6080" failures="0">
+    <testcase name="Register suite should not register user without name" time="13.3590" classname="should not register user without name">
     </testcase>
-    <testcase name="Order suite should add multiple product to the cart" time="2.1270" classname="should add multiple product to the cart">
+    <testcase name="Register suite should not register user without email" time="1.5100" classname="should not register user without email">
     </testcase>
-    <testcase name="Order suite should change product quantity in the cart" time="0.8820" classname="should change product quantity in the cart">
+    <testcase name="Register suite should not register user without password" time="0.9340" classname="should not register user without password">
     </testcase>
-    <testcase name="Order suite should remove product from the cart" time="0.7110" classname="should remove product from the cart">
+    <testcase name="Register suite should not register user with unmatched passwords" time="1.5440" classname="should not register user with unmatched passwords">
     </testcase>
-    <testcase name="Order suite should ask for sign in when proceeding to checkout if no user logged in" time="0.6910" classname="should ask for sign in when proceeding to checkout if no user logged in">
+    <testcase name="Register suite should succesfully register a user" time="3.1350" classname="should succesfully register a user">
     </testcase>
-    <testcase name="Order suite should proceed to checkout after user login" time="2.6470" classname="should proceed to checkout after user login">
-    </testcase>
-    <testcase name="Order suite should not ask for sing in when proceeding to checkout if user is previously logged in" time="3.0520" classname="should not ask for sing in when proceeding to checkout if user is previously logged in">
-    </testcase>
-    <testcase name="Order suite should not proceed to payment method if address field is not filled" time="1.5370" classname="should not proceed to payment method if address field is not filled">
-    </testcase>
-    <testcase name="Order suite should not proceed to payment method if city field is not filled" time="1.4450" classname="should not proceed to payment method if city field is not filled">
-    </testcase>
-    <testcase name="Order suite should not proceed to payment method if postalCode field is not filled" time="1.5380" classname="should not proceed to payment method if postalCode field is not filled">
-    </testcase>
-    <testcase name="Order suite should not proceed to payment method if country field is not filled" time="1.4880" classname="should not proceed to payment method if country field is not filled">
-    </testcase>
-    <testcase name="Order suite should proceed to payment method if all fields are filled" time="1.6210" classname="should proceed to payment method if all fields are filled">
-    </testcase>
-    <testcase name="Order suite should select payment method and proceed to &quot;place and order&quot; tab" time="0.8910" classname="should select payment method and proceed to &quot;place and order&quot; tab">
-    </testcase>
-    <testcase name="Order suite should create an order" time="0.7290" classname="should create an order">
+    <testcase name="Register suite should not register a user with existing email" time="1.1260" classname="should not register a user with existing email">
     </testcase>
   </testsuite>
 </testsuites>

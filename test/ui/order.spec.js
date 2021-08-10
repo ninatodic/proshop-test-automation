@@ -21,7 +21,7 @@ const shippingTab = new ShippingTab();
 const paymentMethodTab = new PaymentMethodTab();
 const placeOrderTab = new PlaceOrderTab();
 
-describe.only('Order suite', () => {
+describe('Order suite', () => {
   let products = [
     productData.product1,
     productData.product2,
@@ -157,6 +157,7 @@ describe.only('Order suite', () => {
   });
 
   after('cleanup', async () => {
+    await navBar.logout();
     for (const product of products) {
       await productApi.deleteProduct(product._id);
     }

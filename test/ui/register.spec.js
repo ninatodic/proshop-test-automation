@@ -12,8 +12,8 @@ const verify = new Verifications();
 const api = new UserApi();
 
 describe('Register suite', () => {
-  beforeEach(async () => {
-    await driver.get(`${config.baseUrl}/register`);
+  beforeEach(() => {
+    driver.get(`${config.baseUrl}/register`);
   });
 
   it('should not register user without name', async () => {
