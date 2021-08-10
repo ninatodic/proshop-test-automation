@@ -23,14 +23,14 @@ Create a .env file in then root and add the following
 
 ## Config file
 
-In config file set browser, directory and file.
+In config file set browser, suite and spec.
 
 Supported browser chrome and firefox.
 
-If directory and file are not set, all tests will run.
-To run api tests set directory to api.
-To run ui tests set directory to ui.
-To run single spec set directory and file name
+If suite and spec are not set, all tests will run.
+To run api tests set suite to api.
+To run ui tests set suite to ui.
+To run single spec set suite and spec name
 
 ## Run tests
 
