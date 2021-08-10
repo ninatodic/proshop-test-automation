@@ -1,8 +1,9 @@
-Test automation project for ProShop eCommerce Platform (MERN stack & Redux)
+#Test automation project for ProShop eCommerce Platform (MERN stack & Redux)
 
-Env Variables
+##Env Variables
 Create a .env file in then root and add the following
-#base url
+
+`#base url
 PS_BASE_URL=http://proshopappnina.herokuapp.com
 
 #admin credentials
@@ -13,10 +14,10 @@ PS_ADMIN_PASSWORD=123456
 #user credentials
 PS_USER_NAME=User
 PS_USER_EMAIL = user@example.com
-PS_USER_PASSWORD = 123456
+PS_USER_PASSWORD = 123456`
 
-Install Dependencies
-npm install
+##Install Dependencies
+`npm install`
 
 In config file set browser, directory and file.
 
@@ -27,5 +28,5 @@ To run api tests set directory to api.
 To run ui tests set directory to ui.
 To run single spec set directory and file name
 
-To run tests
-npm test
+##To run tests
+`npm test`
